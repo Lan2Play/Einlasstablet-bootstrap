@@ -10,7 +10,7 @@ if [ ! -d "/root/.ssh" ]; then
    sudo mkdir /root/.ssh
 fi
 
-if [[ "$(stat -L -c '%a' /root/.ssh)" != "700" ]]; then
+if [[ "$(sudo stat -L -c '%a' /root/.ssh)" != "700" ]]; then
    sudo chmod 700 /root/.ssh
 fi
 
@@ -23,11 +23,11 @@ if [ ! -f "/root/.ssh/id_rsa" ]; then
     done
 fi
 
-if [[ "$(stat -L -c '%a' /root/.ssh/id_rsa)" != "600" ]]; then
+if [[ "$(sudo stat -L -c '%a' /root/.ssh/id_rsa)" != "600" ]]; then
    sudo chmod 600 /root/.ssh/id_rsa
 fi
 
-if [[ "$(stat -L -c '%a' /root/.ssh/id_rsa.pub)" != "644" ]]; then
+if [[ "$(sudo stat -L -c '%a' /root/.ssh/id_rsa.pub)" != "644" ]]; then
    sudo chmod 644 /root/.ssh/id_rsa.pub
 fi
 
@@ -38,33 +38,33 @@ then
 fi
 
 
-if [ ! -d "/lan2play/.ssh" ]; then
-    mkdir /lan2play/.ssh
+if [ ! -d "/home/lan2play/.ssh" ]; then
+    mkdir /home/lan2play/.ssh
 fi
 
-if [[ "$(stat -L -c '%a' /lan2play/.ssh)" != "700" ]]; then
-    chmod 700 /lan2play/.ssh
+if [[ "$(stat -L -c '%a' /home/lan2play/.ssh)" != "700" ]]; then
+    chmod 700 /home/lan2play/.ssh
 fi
 
-if [ ! -f "/lan2play/.ssh/id_rsa" ]; then
-    sudo cp /root/.ssh/id_rsa /lan2play/.ssh/id_rsa
-    sudo cp /root/.ssh/id_rsa.pub /lan2play/.ssh/id_rsa.pub
-    sudo chown lan2play:lan2play /lan2play/.ssh/id_rsa
-    sudo chown lan2play:lan2play /lan2play/.ssh/id_rsa.pub
+if [ ! -f "/home/lan2play/.ssh/id_rsa" ]; then
+    sudo cp /root/.ssh/id_rsa /home/lan2play/.ssh/id_rsa
+    sudo cp /root/.ssh/id_rsa.pub /home/lan2play/.ssh/id_rsa.pub
+    sudo chown lan2play:lan2play /home/lan2play/.ssh/id_rsa
+    sudo chown lan2play:lan2play /home/lan2play/.ssh/id_rsa.pub
 fi
 
-if [[ "$(stat -L -c '%a' /lan2play/.ssh/id_rsa)" != "600" ]]; then
-    chmod 600 /lan2play/.ssh/id_rsa
+if [[ "$(stat -L -c '%a' /home/lan2play/.ssh/id_rsa)" != "600" ]]; then
+    chmod 600 /home/lan2play/.ssh/id_rsa
 fi
 
-if [[ "$(stat -L -c '%a' /lan2play/.ssh/id_rsa.pub)" != "644" ]]; then
-    chmod 644 /lan2play/.ssh/id_rsa.pub
+if [[ "$(stat -L -c '%a' /home/lan2play/.ssh/id_rsa.pub)" != "644" ]]; then
+    chmod 644 /home/lan2play/.ssh/id_rsa.pub
 fi
 
 
-if ! grep github.com /lan2play/.ssh/known_hosts > /dev/null
+if ! grep github.com /home/lan2play/.ssh/known_hosts > /dev/null
 then
-    ssh-keyscan github.com >> /lan2play/.ssh/known_hosts
+    ssh-keyscan github.com >> /home/lan2play/.ssh/known_hosts
 fi
 
 if [ $(dpkg -l git| grep "ii.*git" | wc | awk '{print $1}') == 0 ]; then
