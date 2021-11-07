@@ -77,9 +77,7 @@ echo "check repo available"
 # Clone dev-env repo if not already present
 if [ ! -d "/home/lan2play/.ansibledeploy" ]; then
   echo "ansibledeploy repo not available, clone"
-
-    echo "Docker, use ssh"
-		git clone git@github.com:Lan2Play/Einlasstablet.git /home/lan2play/.ansibledeploy && cd /home/lan2play/.ansibledeploy
+  git clone git@github.com:Lan2Play/Einlasstablet.git /home/lan2play/.ansibledeploy && cd /home/lan2play/.ansibledeploy
 else
   echo "ansibledeploy available, pull"
   cd /home/lan2play/.ansibledeploy && git pull
