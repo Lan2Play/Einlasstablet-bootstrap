@@ -7,16 +7,16 @@ sudo apt-get update -y
 sudo apt-get --assume-yes upgrade
 
 if [ ! -d "/root/.ssh" ]; then
-    mkdir /root/.ssh
+   sudo mkdir /root/.ssh
 fi
 
 if [[ "$(stat -L -c '%a' /root/.ssh)" != "700" ]]; then
-    chmod 700 /root/.ssh
+   sudo chmod 700 /root/.ssh
 fi
 
 if [ ! -f "/root/.ssh/id_rsa" ]; then
-    ssh-keygen -t ed25519 -f /root/.ssh/id_rsa -N ''
-    cat /root/.ssh/id_rsa.pub
+   sudo ssh-keygen -t ed25519 -f /root/.ssh/id_rsa -N ''
+   sudo cat /root/.ssh/id_rsa.pub
     while read -r -p "please add the key to github and confirm (y/n)? " response && ([ "$response" != "y" ] && [ "$response" != "Y" ])
     do
         echo "you need to confirm!"
@@ -24,17 +24,17 @@ if [ ! -f "/root/.ssh/id_rsa" ]; then
 fi
 
 if [[ "$(stat -L -c '%a' /root/.ssh/id_rsa)" != "600" ]]; then
-    chmod 600 /root/.ssh/id_rsa
+   sudo chmod 600 /root/.ssh/id_rsa
 fi
 
 if [[ "$(stat -L -c '%a' /root/.ssh/id_rsa.pub)" != "644" ]]; then
-    chmod 644 /root/.ssh/id_rsa.pub
+   sudo chmod 644 /root/.ssh/id_rsa.pub
 fi
 
 
 if ! grep github.com /root/.ssh/known_hosts > /dev/null
 then
-    ssh-keyscan github.com >> /root/.ssh/known_hosts
+   sudo ssh-keyscan github.com >> /root/.ssh/known_hosts
 fi
 
 
